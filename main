@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class CaesarCipher {
+    public static final String eng = "abcdefghijklmnopqrstuvwxyz";
+    
+    public static String encryptData(String inputStr, int shiftKey) {
+
+
+        inputStr = inputStr.toLowerCase();
+
+        String encryptStr = "";
+
+        for (int i = 0; i < inputStr.length(); i++) {
+            int pos = eng.indexOf(inputStr.charAt(i));
+
+            int encryptPos = (shiftKey + pos) % 26;
+            char encryptChar = eng.charAt(encryptPos);
+
+            encryptStr += encryptChar;
+        }
+
+        return encryptStr;
+    }
+
+    public static String decryptData (String inputStr,int shiftKey){
+
+        inputStr = inputStr.toLowerCase();
+
+        String decryptStr = "";
+
+        for (int i = 0;i < inputStr.length();i++){
+
+            int pos = eng.indexOf(inputStr.charAt(i));
+
+            int decryptPos = (pos - shiftKey)%26;
+
+            if (decryptPos < 0 ){
+                decryptPos = eng.length() + decryptPos;
+            }
+            char decryptChar = eng.charAt(decryptPos);
+
+            decryptStr += decryptChar;
+        }
+    return decryptStr;
+    }
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter cod if you not dayn");
+        String inputStr = sc.nextLine();
+
+        System.out.println("what value key");
+        int shiftKey = Integer.valueOf(sc.nextLine());
+
+        System.out.println("Encrypted Data => " + encryptData(inputStr, shiftKey));
+        System.out.println("Decrypted Data => " + decryptData(encryptData(inputStr, shiftKey), shiftKey));
+
+        sc.close();
+    }
+}
